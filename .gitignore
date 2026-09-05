@@ -1,0 +1,28 @@
+# Environment
+.env
+
+# Virtual environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# Chroma
+data/chroma/
+
+# Uploaded/generated documents
+data/documents/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

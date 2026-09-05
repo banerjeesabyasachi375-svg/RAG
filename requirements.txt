@@ -1,0 +1,21 @@
+langchain
+langchain-community
+langchain-text-splitters
+pypdf
+
+
+langchain-huggingface
+sentence-transformers
+
+#vector stores
+langchain-chroma
+chromadb
+
+
+#langchain for gemini
+langchain-google-genai
+
+#web-api
+fastapi
+uvicorn
+python-multipart
