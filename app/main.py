@@ -28,11 +28,12 @@ async def upload_document(file: UploadFile = File(...)):
 
 class QueryRequest(BaseModel):
     question: str
+    session_id: str
 
 
 @app.post("/query")
 async def query(request: QueryRequest):
-    answer = query_rag(request.question)
+    answer = query_rag(request.question, request.session_id)
 
     return {
         "question": request.question,
