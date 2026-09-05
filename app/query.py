@@ -22,6 +22,7 @@ retriever = vector_store.as_retriever(
     search_type="mmr", search_kwargs={"k": 6, "fetch_k": 20}
 )
 
+
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
@@ -37,11 +38,13 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-# Base Chain Construction
+# Base Chain
+# FIX: Explicitly forward 'chat_history' so ChatPromptTemplate receives it
 base_chain = (
     {
         "context": (lambda x: x["question"]) | retriever | format_docs,
         "question": lambda x: x["question"],
+        "chat_history": lambda x: x["chat_history"],
     }
     | prompt
     | llm
@@ -68,7 +71,7 @@ rag_chain_with_history = RunnableWithMessageHistory(
 )
 
 
-def query_rag(question: str, session_id: str) -> str:
+def query_rag(question: str, session_id: str = "default_session") -> str:
     """Executes the query idempotently per session_id."""
     return rag_chain_with_history.invoke(
         {"question": question},
