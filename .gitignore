@@ -17,9 +17,6 @@ __pycache__/
 # Chroma
 data/chroma/
 
-# Uploaded/generated documents
-data/documents/
-
 # OS
 .DS_Store
 Thumbs.db
