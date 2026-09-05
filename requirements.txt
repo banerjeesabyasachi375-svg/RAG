@@ -11,6 +11,7 @@ chromadb
 
 #langchain for gemini
 langchain-google-genai
+langchain-openai
 
 #web-api
 fastapi

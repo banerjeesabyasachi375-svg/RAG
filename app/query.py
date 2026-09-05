@@ -1,7 +1,7 @@
 from langchain_chroma import Chroma
+from langchain_openai import ChatOpenAI  # Updated import
 
 from langchain_google_genai import (
-    ChatGoogleGenerativeAI,
     GoogleGenerativeAIEmbeddings
 )
 
@@ -9,6 +9,8 @@ from langchain_core.prompts import (
     ChatPromptTemplate,
     MessagesPlaceholder
 )
+
+from langchain_openai import ChatOpenAI  # Updated import
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
@@ -61,10 +63,10 @@ def format_docs(docs):
 # LLM
 # ==========================================
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
+llm = ChatOpenAI(
+    model="gpt-4o-mini",  # Or "gpt-4o"
     temperature=0.2,
-    max_output_tokens=2048
+    max_tokens=512
 )
 
 
