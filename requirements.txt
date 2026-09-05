@@ -4,9 +4,6 @@ langchain-text-splitters
 pypdf
 
 
-langchain-huggingface
-sentence-transformers
-
 #vector stores
 langchain-chroma
 chromadb
