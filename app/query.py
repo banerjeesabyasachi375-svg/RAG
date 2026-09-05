@@ -1,6 +1,9 @@
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
-from langchain_google_genai import ChatGoogleGenerativeAI
+
+from langchain_google_genai import (
+    ChatGoogleGenerativeAI,
+    GoogleGenerativeAIEmbeddings
+)
 
 from langchain_core.prompts import (
     ChatPromptTemplate,
@@ -16,20 +19,29 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+# ==========================================
 # Embeddings
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+# ==========================================
+
+embeddings_model = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001"
 )
 
 
-# Vector store
+# ==========================================
+# Vector Store
+# ==========================================
+
 vector_store = Chroma(
     persist_directory="data/chroma",
     embedding_function=embeddings_model
 )
 
 
+# ==========================================
 # Retriever
+# ==========================================
+
 retriever = vector_store.as_retriever(
     search_type="mmr",
     search_kwargs={
@@ -45,7 +57,10 @@ def format_docs(docs):
     )
 
 
+# ==========================================
 # LLM
+# ==========================================
+
 llm = ChatGoogleGenerativeAI(
     model="gemini-3.7-flash",
     temperature=0.2,
@@ -53,7 +68,10 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
+# ==========================================
 # Prompt
+# ==========================================
+
 prompt = ChatPromptTemplate.from_messages([
     (
         "system",
@@ -69,11 +87,17 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 
 
-# Chat history
+# ==========================================
+# Chat History
+# ==========================================
+
 chat_history = []
 
 
-# RAG chain
+# ==========================================
+# RAG Chain
+# ==========================================
+
 rag_chain = (
     {
         "context": retriever | format_docs,

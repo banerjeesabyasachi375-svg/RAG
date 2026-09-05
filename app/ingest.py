@@ -10,10 +10,16 @@ from langchain_community.document_loaders import (
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
+from langchain_google_genai import (
+    GoogleGenerativeAIEmbeddings
+)
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+embeddings_model = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001"
 )
 
 text_splitter = RecursiveCharacterTextSplitter(
