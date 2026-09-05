@@ -64,7 +64,7 @@ def format_docs(docs):
 llm = ChatGoogleGenerativeAI(
     model="gemini-3.7-flash",
     temperature=0.2,
-    max_output_tokens=512
+    max_output_tokens=2048
 )
 
 
